@@ -1,94 +1,138 @@
 # MarkFlow
-MarkFlow is a web application that converts PDFs, Office documents, images, audio, and other supported formats into clean, AI-ready Markdown using Microsoft's MarkItDown library.
 
-Convert your documents into clean, AI-ready Markdown.
+Convert documents into clean, AI-ready Markdown.
 
-MarkFlow is a simple web application built with React and FastAPI that uses Microsoft's MarkItDown library to convert documents into clean, structured Markdown. Whether it's a PDF, Word document, PowerPoint, Excel sheet, or other supported formats, MarkFlow makes it easy to extract readable Markdown that can be used for documentation, note-taking, or AI applications.
+MarkFlow is a web application built with **React** and **FastAPI** that uses Microsoft's **MarkItDown** library to convert various document formats into structured Markdown. It provides a simple interface for uploading files, previewing the converted output, and downloading the generated Markdown.
 
-Features
-Convert PDFs to Markdown
-Convert Word, PowerPoint, and Excel files
-Extract text from images using OCR
-Support for HTML, CSV, JSON, XML, EPUB, ZIP, and more
-Preview the generated Markdown
-Copy Markdown with one click
-Download the converted .md file
-Clean and responsive interface
-Tech Stack
+---
 
-Frontend
+## Features
 
-React
-Axios
-CSS
+- Convert PDF files to Markdown
+- Convert Word, PowerPoint, and Excel documents
+- Extract text from images using OCR
+- Support for HTML, CSV, JSON, XML, EPUB, ZIP, and more
+- Live Markdown preview
+- Copy converted Markdown
+- Download Markdown as `.md`
+- Responsive and clean UI
 
-Backend
+---
 
-FastAPI
-MarkItDown
-Uvicorn
-Python
-Getting Started
-Clone the repository
+## Tech Stack
+
+### Frontend
+
+- React
+- Axios
+- CSS
+
+### Backend
+
+- FastAPI
+- MarkItDown
+- Uvicorn
+- Python
+
+---
+
+## Project Structure
+
+```
+markflow/
+├── backend/
+├── frontend/
+└── README.md
+```
+
+---
+
+## Installation
+
+### Clone the repository
+
+```bash
 git clone https://github.com/your-username/markflow.git
 cd markflow
-Backend
+```
+
+### Backend
+
+```bash
 cd backend
 
 python -m venv venv
+```
 
 Activate the virtual environment.
 
-Windows
+**Windows**
 
+```bash
 venv\Scripts\activate
+```
 
-macOS / Linux
+**macOS / Linux**
 
+```bash
 source venv/bin/activate
+```
 
-Install the dependencies.
+Install dependencies.
 
+```bash
 pip install -r requirements.txt
+```
 
 Run the server.
 
+```bash
 uvicorn main:app --reload
-Frontend
+```
+
+---
+
+### Frontend
+
+```bash
 cd frontend
 
 npm install
 npm run dev
-Supported File Types
-PDF
-Word
-PowerPoint
-Excel
-Images (OCR)
-HTML
-CSV
-JSON
-XML
-EPUB
-ZIP
-YouTube URLs
-Other formats supported by Microsoft's MarkItDown
-Project Structure
-markflow
-├── backend
-├── frontend
-└── README.md
-Future Plans
-Drag and drop uploads
-Batch conversion
-Token estimation
-Markdown statistics
-Reading time estimation
-Dark mode
-Better error handling
-License
+```
+
+---
+
+## Supported File Types
+
+- PDF
+- DOCX
+- PPTX
+- XLSX
+- Images (OCR)
+- HTML
+- CSV
+- JSON
+- XML
+- EPUB
+- ZIP
+- YouTube URLs
+- Other formats supported by Microsoft's MarkItDown
+
+---
+
+## Roadmap
+
+- [ ] Drag and drop uploads
+- [ ] Batch conversion
+- [ ] Token estimation
+- [ ] Markdown statistics
+- [ ] Reading time estimation
+- [ ] Dark mode
+- [ ] Better error handling
+
+---
+
+## License
 
 This project is licensed under the MIT License.
-
-If you have any suggestions or find a bug, feel free to open an issue or submit a pull request.
-
