@@ -1,6 +1,10 @@
+import { useState } from "react";
+import axios from "axios";
 import "./App.css";
 
+
 function App() {
+  const [selectedFile, setSelectedFile] = useState(null);
   return (
     <div className="app">
       {/* because class is a reserved keyword in JavaScript. React uses className to apply CSS classes. */}
@@ -10,7 +14,13 @@ function App() {
 
       <p>Convert documents into clean, AI-ready Markdown.</p>
 
-      <input type="file" />
+      <input
+        type="file"
+        onChange={(event) => {
+          setSelectedFile(event.target.files[0]);
+        }}
+      />
+
 
       <br />
       <br />
