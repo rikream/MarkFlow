@@ -1,9 +1,18 @@
 from fastapi import FastAPI, UploadFile, File#(File is a function provided by FastAPI.)It's simply a helper function that tells FastAPI where to get the data from.
+from fastapi.middleware.cors import CORSMiddleware
 from markitdown import MarkItDown
 import shutil
 import os
 
 app = FastAPI()# app object this is the core obj for accesing all endpoints
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173","http://127.0.0.1:5173",],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # this is for safety if the folder is not exist it shuld not raise an error
 UPLOAD_FOLDER = "uploads"
@@ -28,7 +37,7 @@ async def upload_file(file: UploadFile = File(...)):
 
     return {
         "filename": filename,
-        "markitdown":result.text_content,
+        "markdown":result.text_content,
         "message": "File uploaded successfully!"
     }
 

@@ -1,0 +1,62 @@
+const [selectedFile, setSelectedFile] = useState(null);
+const [markdown, setMarkdown] = useState("");
+
+
+Yes, React automatically creates setMarkdown for you.
+You do not define it yourself.
+
+How it works
+
+When you write:
+
+const [markdown, setMarkdown] = useState("");
+
+React's useState() returns two values.
+
+Imagine this is not the actual React code, but just an illustration:
+
+useState("")
+
+returns something like:
+
+[
+  "",                  // current value
+  function setValue()  // function to change it
+]
+
+Then JavaScript array destructuring does this:
+
+const [markdown, setMarkdown] = useState("");
+
+which is similar to:
+
+markdown = "";
+setMarkdown = function (...) { ... };
+
+So React creates setMarkdown for you.
+
+What does setMarkdown() do?
+
+When you call:
+
+setMarkdown("Hello");
+
+React internally does something like this:
+
+Old value:
+markdown = ""
+
+↓
+
+setMarkdown("Hello")
+
+↓
+
+New value:
+markdown = "Hello"
+
+Then React says:
+
+"The state changed. I need to render the component again."
+
+That is why your UI updates automatically.
