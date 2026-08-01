@@ -7,73 +7,123 @@ function App() {
   // so seletcted state is for storing the file that user upload while markdownown state is for storing what backend response as react cant store,
   // (It's not that "React can't store" values—it can. The important difference is that state triggers a re-render.)
 
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [markdown, setMarkdown] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null); // for storing what frontend gives
+  const [markdown, setMarkdown] = useState(""); //for what backend return
+  const [loading, setLoading] = useState(false);// for loadind animation
 
   const uploadFile = async () => {
-    console.log("Convert button clicked");//this is for debug
+
+    if (!selectedFile) return;
+
+    console.log("Convert button clicked");
+
+    setLoading(true);
 
     try {
+
       const formData = new FormData();
-      // FormData() ,prebuilt class of javascirpt (u cant directly send the file that u upload in backend u have to send it in some format that fomat is automatically handeled by formdata)
-      formData.append("file", selectedFile);//adding a new file to formdata object(ufing "file" as fastapi expecting field name "file" in backend so u must send same)
 
+      formData.append("file", selectedFile);
 
-      //storing response getted form backend which an object
       const response = await axios.post(
         "http://127.0.0.1:8000/upload",
         formData
       );
 
-      console.log("Full response: ", response);
-      console.log("response data: ", response.data);
-      console.log("Markdown: ", response.data.markdown);
-
-      //lets have a cleaned format after gettting response
-      const cleaned = response.data.markdown// response.data.markdown give us the markdwon data and 
-        //setMarkdown is an fucntion for storing markdown value return in markdown variable
-        .replace(/\f/g, "")          // Remove page breaks
-        .replace(/\r/g, "")          // Remove carriage returns
-        .replace(/…+/g, "")          // Remove long dotted lines
-        .replace(/\n{3,}/g, "\n\n"); // Maximum 2 blank lines
+      const cleaned = response.data.markdown
+        .replace(/\f/g, "")
+        .replace(/\r/g, "")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
 
       setMarkdown(cleaned);
-    } catch (error) {
-      console.error(error);
+
     }
+    catch (error) {
+
+      console.error(error);
+
+    }
+    finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
+  //this is for coping what backend retun in frontend
+  const copyMarkdown = async () => {
+
+    try {
+
+      await navigator.clipboard.writeText(markdown);
+
+      alert("Markdown copied successfully!");
+
+    }
+    catch (error) {
+
+      console.error(error);
+
+    }
+
   };
 
   return (
     <div className="app">
-      {/* because class is a reserved keyword in JavaScript. React uses className to apply CSS classes. */}
 
-      <h1>MarkFlow</h1>
+      <div className="header">
+        <h1>📄 MarkFlow</h1>
+        <p>Convert documents into clean Markdown.</p>
+      </div>
 
-      <p>Convert documents into clean, AI-ready Markdown.</p>
+      <div className="main">
 
-      <input
-        type="file"
-        onChange={(event) => {
-          setSelectedFile(event.target.files[0]);
-        }}
-      />
+        <div className="upload-box">
 
+          <h2>Upload Document</h2>
 
-      <br />
-      <br />
+          <input
+            type="file"
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+          />
 
-      <button onClick={uploadFile}>Convert</button>
+          <p>
+            {selectedFile
+              ? selectedFile.name
+              : "No file selected"}
+          </p>
 
-      <h2>Markdown Output</h2>
+          <button
+            onClick={uploadFile}
+            disabled={!selectedFile || loading}
+          >
+            {loading ? "Converting..." : "Convert"}
+          </button>
 
-      <textarea
-        rows="15"
-        cols="80"
-        value={markdown}
-        readOnly
-      ></textarea>
+        </div>
+
+        <div className="output-box">
+
+          <h2>Markdown Output</h2>
+
+          <textarea
+            value={markdown}
+            readOnly
+          />
+
+          <button onClick={copyMarkdown}>
+            📋 Copy Markdown
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
+
 
 export default App;
