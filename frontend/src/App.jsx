@@ -43,6 +43,10 @@ function App() {
 
       console.error(error);
 
+      setMarkdown("");
+
+      alert(error.response?.data?.detail || "Something went wrong.");
+
     }
     finally {
 
@@ -67,6 +71,26 @@ function App() {
       console.error(error);
 
     }
+
+  };
+
+  // Download the markdown as a .md file
+  const downloadMarkdown = () => {
+
+    const blob = new Blob([markdown], {
+      type: "text/markdown"
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "output.md";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
 
   };
 
@@ -95,6 +119,7 @@ function App() {
               : "No file selected"}
           </p>
 
+          {/* //upload file button */}
           <button
             onClick={uploadFile}
             disabled={!selectedFile || loading}
@@ -113,8 +138,17 @@ function App() {
             readOnly
           />
 
+          {/* //copy button */}
           <button onClick={copyMarkdown}>
             📋 Copy Markdown
+          </button>
+
+          {/* //downlaod markdown button */}
+          <button
+            onClick={downloadMarkdown}
+            disabled={!markdown}
+          >
+            ⬇ Download Markdown
           </button>
 
         </div>

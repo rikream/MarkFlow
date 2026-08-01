@@ -166,7 +166,7 @@ textarea:focus {
   }
 
   textarea {
-    height: 50vh;
+    height: 45vh;
   }
 
 }
@@ -174,4 +174,10 @@ textarea:focus {
 button:active {
   transform: scale(0.97);
   background-color: #1d4ed8;
+}
+
+
+/* it was operlaping wuth copy button */
+.output-box button {
+  margin-top: 12px;
 }
