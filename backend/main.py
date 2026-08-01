@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File#(File is a function provided by FastAPI.)It's simply a helper function that tells FastAPI where to get the data from.
 from fastapi.middleware.cors import CORSMiddleware
 from markitdown import MarkItDown
+from fastapi import HTTPException #for handeling errors of files that cant be converted
 import shutil
 import os
 
@@ -27,17 +28,45 @@ def home():
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
+
     filename = file.filename or "uploaded_file"
-    file_path = os.path.join(UPLOAD_FOLDER, filename)#result->uploads/sample.pdf
+
+    # Allowed file types
+    allowed_extensions = {
+        ".pdf",
+        ".docx",
+        ".pptx",
+        ".xlsx",
+        ".txt",
+        ".html"
+    }
+
+    extension = os.path.splitext(filename)[1].lower() # it return file type easy 
+    print("Extension:", extension)
+    
+    if extension not in allowed_extensions:
+        raise HTTPException(
+        status_code=400,
+        detail="Unsupported file type. Please upload a PDF, DOCX, PPTX, XLSX, TXT, or HTML file."
+    )
+
+    file_path = os.path.join(UPLOAD_FOLDER, filename)# it is for file path
 
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    result =md.convert(file_path)#MarkItDown doesn't need your UploadFile object. It just needs to know where the file is stored. but can use file obj to
+    try:
 
-    return {
-        "filename": filename,
-        "markdown":result.text_content,
-        "message": "File uploaded successfully!"
-    }
+        result = md.convert(file_path)# md.convert only need file locatoin so it can acces it and convert it into md format
 
+        return {
+            "filename": filename,
+            "markdown": result.text_content,
+            "message": "File uploaded successfully!"
+        }
+
+    finally:
+
+        # Delete the uploaded file after conversion
+        if os.path.exists(file_path):
+            os.remove(file_path)
