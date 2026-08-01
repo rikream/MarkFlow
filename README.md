@@ -1,21 +1,23 @@
 # MarkFlow
 
-Convert documents into clean, AI-ready Markdown.
+MarkFlow is a full-stack web application that converts documents into clean Markdown using Microsoft's MarkItDown library. It provides a simple interface where users can upload supported documents, preview the converted Markdown, copy it, or download it as a `.md` file.
 
-MarkFlow is a web application built with **React** and **FastAPI** that uses Microsoft's **MarkItDown** library to convert various document formats into structured Markdown. It provides a simple interface for uploading files, previewing the converted output, and downloading the generated Markdown.
+**Live Demo:** https://markflow-converter.vercel.app
 
 ---
 
 ## Features
 
 - Convert PDF files to Markdown
-- Convert Word, PowerPoint, and Excel documents
-- Extract text from images using OCR
-- Support for HTML, CSV, JSON, XML, EPUB, ZIP, and more
-- Live Markdown preview
-- Copy converted Markdown
-- Download Markdown as `.md`
-- Responsive and clean UI
+- Convert Word (.docx) documents
+- Convert PowerPoint (.pptx) presentations
+- Convert Excel (.xlsx) spreadsheets
+- Convert HTML files
+- Convert plain text (.txt) files
+- Preview the converted Markdown
+- Copy Markdown to the clipboard
+- Download the output as a `.md` file
+- Display clear error messages for unsupported file types
 
 ---
 
@@ -24,6 +26,7 @@ MarkFlow is a web application built with **React** and **FastAPI** that uses Mic
 ### Frontend
 
 - React
+- Vite
 - Axios
 - CSS
 
@@ -31,17 +34,30 @@ MarkFlow is a web application built with **React** and **FastAPI** that uses Mic
 
 - FastAPI
 - MarkItDown
-- Uvicorn
 - Python
+- Uvicorn
+
+### Deployment
+
+- Vercel
+- Render
 
 ---
 
 ## Project Structure
 
-```
-markflow/
+```text
+MarkFlow/
 ├── backend/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── uploads/
+│
 ├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
 └── README.md
 ```
 
@@ -52,8 +68,8 @@ markflow/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/markflow.git
-cd markflow
+git clone https://github.com/rikream/MarkFlow.git
+cd MarkFlow
 ```
 
 ### Backend
@@ -72,19 +88,19 @@ Activate the virtual environment.
 venv\Scripts\activate
 ```
 
-**macOS / Linux**
+**macOS/Linux**
 
 ```bash
 source venv/bin/activate
 ```
 
-Install dependencies.
+Install the required packages.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the server.
+Run the backend.
 
 ```bash
 uvicorn main:app --reload
@@ -101,35 +117,45 @@ npm install
 npm run dev
 ```
 
+The frontend will run at:
+
+```
+http://localhost:5173
+```
+
 ---
 
 ## Supported File Types
 
-- PDF
-- DOCX
-- PPTX
-- XLSX
-- Images (OCR)
-- HTML
-- CSV
-- JSON
-- XML
-- EPUB
-- ZIP
-- YouTube URLs
-- Other formats supported by Microsoft's MarkItDown
+- PDF (.pdf)
+- Word (.docx)
+- PowerPoint (.pptx)
+- Excel (.xlsx)
+- HTML (.html)
+- Text (.txt)
 
 ---
 
-## Roadmap
+## Live Demo
 
-- [ ] Drag and drop uploads
-- [ ] Batch conversion
-- [ ] Token estimation
-- [ ] Markdown statistics
-- [ ] Reading time estimation
-- [ ] Dark mode
-- [ ] Better error handling
+Frontend
+
+https://markflow-converter.vercel.app
+
+Backend API
+
+https://markflow-6eqb.onrender.com
+
+---
+
+## Future Improvements
+
+- Drag and drop file upload
+- Batch conversion
+- Dark mode
+- Conversion history
+- Markdown statistics
+- Better mobile support
 
 ---
 
