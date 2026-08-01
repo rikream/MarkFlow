@@ -26,7 +26,7 @@ function App() {
       formData.append("file", selectedFile);
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/upload",
+        "https://markflow-6eqb.onrender.com/upload",
         formData
       );
 
