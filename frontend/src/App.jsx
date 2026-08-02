@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import logo from "./assets/logo.png";
+// import logo from "./assets/logo.png";// if u want to use a logo later
 
 function App() {
   // so seletcted state is for storing the file that user upload while markdownown state is for storing what backend response as react cant store,
@@ -98,7 +98,7 @@ function App() {
     <div className="app">
 
       <div className="header">
-        <img src={logo} alt="MarkFlow Logo" className="logo" />
+        <h1>📄 MarkFlow</h1>
         <p>Convert documents into clean Markdown.</p>
       </div>
 

@@ -29,6 +29,15 @@ body {
   margin-bottom: 35px;
 }
 
+/* Logo */
+
+.logo {
+  width: 340px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
 .header h1 {
   font-size: 64px;
   color: #2563eb;
@@ -89,7 +98,7 @@ input[type="file"] {
   word-break: break-word;
 }
 
-/* Button */
+/* Buttons */
 
 button {
   width: 100%;
@@ -111,6 +120,11 @@ button:hover:not(:disabled) {
 button:disabled {
   background: #cbd5e1;
   cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.97);
+  background-color: #1d4ed8;
 }
 
 /* Output box */
@@ -145,6 +159,12 @@ textarea:focus {
   border-color: #2563eb;
 }
 
+/* Spacing for output buttons */
+
+.output-box button {
+  margin-top: 12px;
+}
+
 /* Mobile */
 
 @media (max-width: 900px) {
@@ -156,6 +176,11 @@ textarea:focus {
   .upload-box {
     width: 100%;
   }
+
+  /* .logo {
+    width: 120px;
+    height: auto;
+  } */
 
   .header h1 {
     font-size: 42px;
@@ -169,15 +194,4 @@ textarea:focus {
     height: 45vh;
   }
 
-}
-
-button:active {
-  transform: scale(0.97);
-  background-color: #1d4ed8;
-}
-
-
-/* it was operlaping wuth copy button */
-.output-box button {
-  margin-top: 12px;
 }
